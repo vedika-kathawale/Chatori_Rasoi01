@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipes | Chatori Rasoi</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="logo"><a href="index.html">Chatori Rasoi</a></div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recipes.html?type=veg">Veg Recipes</a></li>
+      <li><a href="recipes.html?type=nonveg">Non-Veg Recipes</a></li>
+      <li class="dropdown">
+        <a href="#">Categories ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="recipes.html?category=Healthy%20Snacks">Healthy Snacks</a></li>
+          <li><a href="recipes.html?category=Quick%20Snacks">Quick Snacks</a></li>
+          <li><a href="recipes.html?category=Evening%20Snacks">Evening Snacks</a></li>
+        </ul>
+      </li>
+      <li><a href="index.html#about">About</a></li>
+      <li><button id="modeToggle">🌙</button></li>
+    </ul>
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+  </nav>
+
+  <!-- ===== RECIPES DISPLAY ===== -->
+  <section id="recipes" class="recipes-section">
+    <h2 id="recipeTitle">Recipes</h2>
+    <p id="recipeCount" style="margin:8px 0 16px;color:var(--text);opacity:0.85">Showing <strong>0</strong> recipes</p>
+    <div id="recipeContainer" class="recipe-grid"></div>
+  </section>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+  <script>
+    // Read query params and show appropriate list
+    (function() {
+      function decodeParam(v){ try { return decodeURIComponent(v); } catch(e){ return v; } }
+      const params = new URLSearchParams(location.search);
+      const type = params.get('type');
+      const category = params.get('category');
+      if (type === 'veg') {
+        // Wait a tick for script.js to define functions
+        setTimeout(() => { if (typeof showVeg === 'function') showVeg(); }, 50);
+      } else if (type === 'nonveg') {
+        setTimeout(() => { if (typeof showNonVeg === 'function') showNonVeg(); }, 50);
+      } else if (category) {
+        const cat = decodeParam(category);
+        setTimeout(() => { if (typeof filterCategory === 'function') filterCategory(cat); }, 50);
+      } else {
+        // Default: show all recipes
+        setTimeout(() => { if (typeof displayRecipes === 'function') displayRecipes(recipes); }, 50);
+      }
+    })();
+  </script>
+  <footer class="site-footer">© 2026 Chatori Rasoi. All rights reserved.</footer>
+</body>
+</html>

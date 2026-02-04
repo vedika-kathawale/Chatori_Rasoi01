@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatori Rasoi | Healthy Indian Snacks</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="logo">Chatori Rasoi</div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="recipes.html?type=veg">Veg Recipes</a></li>
+      <li><a href="recipes.html?type=nonveg">Non-Veg Recipes</a></li>
+      <li class="dropdown">
+        <a href="#">Categories ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="recipes.html?category=Healthy%20Snacks">Healthy Snacks</a></li>
+          <li><a href="recipes.html?category=Quick%20Snacks">Quick Snacks</a></li>
+          <li><a href="recipes.html?category=Evening%20Snacks">Evening Snacks</a></li>
+        </ul>
+      </li>
+      <li><a href="#about">About</a></li>
+      <li><button id="modeToggle">🌙</button></li>
+    </ul>
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="home" class="hero">
+      <div class="hero-content">
+        <h1 class="fade-in">Chatori Rasoi</h1>
+        <p class="hero-text fade-in">
+          Easy & healthy Indian snack recipes made with simple ingredients,
+          perfect for everyday home cooking.
+        </p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950" alt="Indian Snacks">
+  </section>
+
+  <!-- ===== VEG / NON-VEG SECTIONS ===== -->
+  <section class="main-sections">
+    <div class="section-card veg" onclick="location.href='recipes.html?type=veg'">
+      <h2>🥬 Veg Snacks</h2>
+      <p>Healthy & easy vegetarian snacks</p>
+    </div>
+
+    <div class="section-card nonveg" onclick="location.href='recipes.html?type=nonveg'">
+      <h2>🍗 Non-Veg Snacks</h2>
+      <p>Simple protein-rich snacks</p>
+    </div>
+  </section>
+
+  <!-- ===== COOKING TIPS ===== -->
+  <section class="tips">
+    <h2>Healthy Indian Snack Tips</h2>
+    <ul>
+      <li>Use air-fryer or shallow frying instead of deep frying</li>
+      <li>Replace refined oil with mustard or groundnut oil</li>
+      <li>Control portions for better digestion</li>
+      <li>Add vegetables for fiber & nutrients in your meal</li>
+    </ul>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="about">
+    <h2>About Chatori Rasoi</h2>
+    <p>
+      Chatori Rasoi is a simple recipe-sharing platform focused on
+      easy, healthy Indian snacks for daily home cooking.<br>
+      All recipes are beginner-friendly and use commonly available ingredients.
+    </p>
+  </section>
+
+  <!-- ===== MOBILE BOTTOM NAV ===== -->
+  <div class="bottom-nav">
+    <span onclick="scrollToTop()">🏠</span>
+    <span onclick="location.href='recipes.html?type=veg'">🥬</span>
+    <span onclick="location.href='recipes.html?type=nonveg'">🍗</span>
+  </div>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+  <footer class="site-footer">© 2026 Chatori Rasoi. All rights reserved.By Vedika Kathawale.</footer>
+</body>
+</html>

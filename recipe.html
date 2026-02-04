@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipe | Chatori Rasoi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo"><a href="index.html">Chatori Rasoi</a></div>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recipes.html?type=veg">Veg Recipes</a></li>
+      <li><a href="recipes.html?type=nonveg">Non-Veg Recipes</a></li>
+      <li><a href="recipes.html">All Recipes</a></li>
+      <li><button id="modeToggle">🌙</button></li>
+    </ul>
+  </nav>
+
+  <main style="padding:24px;">
+    <div id="singleRecipe"></div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    function getParam(name) {
+      const params = new URLSearchParams(location.search);
+      return params.get(name);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const idx = parseInt(getParam('idx'), 10);
+      const container = document.getElementById('singleRecipe');
+      if (!Number.isFinite(idx) || idx < 0 || idx >= recipes.length) {
+        container.innerHTML = '<p>Recipe not found. <a href="recipes.html">Back to recipes</a></p>';
+        return;
+      }
+
+      const r = recipes[idx];
+      container.innerHTML = `
+          <article class="modal-content" style="position:relative;max-width:900px;margin:0 auto;">
+              <button id="backBtn" class="see-recipe">Back</button>
+          <div class="modal-header">
+            <h2>${r.name}</h2>
+            <div class="badges">${r.tags.map(t => `<span>${t}</span>`).join('')}</div>
+          </div>
+          <!-- image intentionally omitted on full recipe page per UX request -->
+          <p><strong>Category:</strong> ${r.category} • <strong>Time:</strong> ${r.time}</p>
+
+          <h3>Ingredients</h3>
+          <ul class="ingredients-list">
+            ${r.ingredients && r.ingredients.length ? r.ingredients.map(i => `<li>${i}</li>`).join('') : '<li>N/A</li>'}
+          </ul>
+
+          ${r.instructions ? `<h3>Instructions</h3><ol>${r.instructions.map(s=>`<li>${s}</li>`).join('')}</ol>` : ''}
+
+          <h3>Nutrition</h3>
+          <p>${r.nutrition || 'N/A'}</p>
+
+          <h3>Tips</h3>
+          <p>${r.tips || ''}</p>
+        </article>
+      `;
+      // Back button behaviour: prefer history.back() for smooth return when possible
+      const backBtn = document.getElementById('backBtn');
+      if (backBtn) {
+        backBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          try {
+            if (document.referrer && document.referrer.includes('recipes.html')) {
+              history.back();
+            } else {
+              location.href = 'recipes.html';
+            }
+          } catch (err) {
+            location.href = 'recipes.html';
+          }
+        });
+      }
+    });
+  </script>
+  <footer class="site-footer">© 2026 Chatori Rasoi. All rights reserved.</footer>
+</body>
+</html>
